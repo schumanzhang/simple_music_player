@@ -1,0 +1,23 @@
+<div class="song-container">
+  <div class="song-header">
+      <div class="form-group">
+          <input type="text" (keyup)="inputChanged($event)" class="form-control" placeholder="Search artist...">
+      </div>
+  </div>
+  <div class="no-result" *ngIf="empty">
+    <img class="error-image" src="https://webmarketingschool.com/wp-content/uploads/2018/03/nojobsfound.png">
+  </div>
+  <div class="loader-container" *ngIf="loading">
+      <div class="loader"></div>
+  </div>
+  <div class="song-body" *ngIf="!loading">
+    <div class="song-card" *ngFor="let song of songs" [ngClass]="{'highlight': song.selected}" (click)="songSelected(song)">
+      <img class="artwork"[src]="song.artwork">
+      <div class="text-section">
+          <span class="song-name">{{(song.song.length > 30) ? (song.song | slice: 0:30)+'..':(song.song)}}</span>
+          <span class="artist-name">{{(song.artist.length > 30) ? (song.artist | slice: 0:30)+'..':(song.artist)}}</span>
+          <span class="album-name"><i>{{(song.album.length > 30) ? (song.album | slice: 0:30)+'..':(song.album)}}</i></span>
+      </div>
+    </div>
+  </div>
+</div>
