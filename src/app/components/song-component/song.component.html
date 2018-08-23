@@ -11,13 +11,20 @@
       <div class="loader"></div>
   </div>
   <div class="song-body" *ngIf="!loading">
-    <div class="song-card" *ngFor="let song of songs" [ngClass]="{'highlight': song.selected}" (click)="songSelected(song)">
+    <div class="song-card" *ngFor="let song of songs; index as i" [ngClass]="{'highlight': selected === i}" (click)="songSelected(i, song)">
       <img class="artwork"[src]="song.artwork">
       <div class="text-section">
-          <span class="song-name">{{(song.song.length > 30) ? (song.song | slice: 0:30)+'..':(song.song)}}</span>
-          <span class="artist-name">{{(song.artist.length > 30) ? (song.artist | slice: 0:30)+'..':(song.artist)}}</span>
-          <span class="album-name"><i>{{(song.album.length > 30) ? (song.album | slice: 0:30)+'..':(song.album)}}</i></span>
+          <span class="song-name">{{(song.song.length > 35) ? (song.song | slice: 0:35)+'..':(song.song)}}</span>
+          <span class="artist-name">{{(song.artist.length > 35) ? (song.artist | slice: 0:35)+'..':(song.artist)}}</span>
+          <span class="album-name"><i>{{(song.album.length > 35) ? (song.album | slice: 0:35)+'..':(song.album)}}</i></span>
+      </div>
+      <div class="volume-icon">
+        <i *ngIf="song.playback" class="fa fa-volume-up indicator"></i>
       </div>
     </div>
   </div>
+
+  <div *ngIf="!audio.paused" class="media-player"><media-player [audio]="audio"></media-player></div>
+  <div class="footer"></div>
+
 </div>

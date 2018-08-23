@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Jsonp } from '@angular/http';
+import { Song } from './../models/song';
 
 @Injectable()
 export class MusicService {
