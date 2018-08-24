@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Subject } from "rxjs/Subject";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/distinctUntilChanged";
@@ -24,6 +24,8 @@ export class SongComponent implements OnInit {
   private audio: any;
   private selected: number;
   private componentRef: any;
+
+  @Output() songData: EventEmitter<any> = new EventEmitter();
 
   constructor(private musicService: MusicService) {
     this.subscription = this.searchTextChanged
@@ -69,10 +71,17 @@ export class SongComponent implements OnInit {
         this.loading = false;
         console.error(err);
       });
-
-      this.empty = this.songs.length === 0 ? true : false;
-      console.log('init songs:', this.songs);
+      this.emitSongData();
     });
+  }
+
+  public emitSongData(): void {
+    if (this.songs.length !== 0) {
+      this.songData.emit(this.songs);
+      this.empty = false;
+    } else {
+      this.empty = true;
+    }
   }
 
   public inputChanged($event): void {

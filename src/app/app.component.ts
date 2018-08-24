@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Song } from './models/song';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  private songs: Song[];
+
+  public handleSongData($event): void {
+    console.log('handleSongData:', $event);
+    this.songs = $event;
+  }
+  
 }
