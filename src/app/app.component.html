@@ -2,10 +2,10 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-5 no-padding">
-      <song-component (songData)="handleSongData($event)"></song-component>
+      <song-component [audio]="audio" [innerWidth]="innerWidth" (songData)="handleSongData($event)"></song-component>
     </div>
-    <div class="col-sm-7 no-padding">
-      <album-component [songData]="songs"></album-component>
+    <div class="col-sm-7 no-padding" *ngIf="innerWidth">
+      <album-component [audio]="audio" [songData]="songs"></album-component>
     </div>
 </div>
 </div>

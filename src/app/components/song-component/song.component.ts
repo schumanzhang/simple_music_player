@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Subject } from "rxjs/Subject";
 import "rxjs/add/operator/debounceTime";
 import "rxjs/add/operator/distinctUntilChanged";
@@ -16,16 +16,17 @@ import { MediaPlayerComponent } from './../media-player/media-player.component';
 })
 export class SongComponent implements OnInit {
 
+  @Output() songData: EventEmitter<any> = new EventEmitter();
+  @Input() audio: any;
+  @Input() innerWidth: boolean;
+
   private songs: Song[];
   private searchTextChanged = new Subject<string>();
   private subscription: any;
   private loading: boolean = false;
   private empty: boolean = false;
-  private audio: any;
   private selected: number;
-  private componentRef: any;
-
-  @Output() songData: EventEmitter<any> = new EventEmitter();
+  private selectedTitle: string;
 
   constructor(private musicService: MusicService) {
     this.subscription = this.searchTextChanged
@@ -37,7 +38,6 @@ export class SongComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.audio = new Audio();
     this.registerPlaybackListeners();
     this.getSearchResults();
   }
@@ -53,7 +53,7 @@ export class SongComponent implements OnInit {
   }
 
   public getSearchResults(searchTerm = 'coldplay'): void {
-    this.selected = undefined;
+    this.selected = 0;
     this.loading = true;
     this.musicService.getMusicData(searchTerm).subscribe(res => {
       this.loading = false;
@@ -77,7 +77,7 @@ export class SongComponent implements OnInit {
 
   public emitSongData(): void {
     if (this.songs.length !== 0) {
-      this.songData.emit(this.songs);
+      this.songData.emit(this.songs[0]);
       this.empty = false;
     } else {
       this.empty = true;
@@ -89,10 +89,17 @@ export class SongComponent implements OnInit {
   }
 
   public songSelected(i: number, song: Song): void {
+    this.innerWidth = (window.innerWidth > 576) ? true: false;
+    this.selectedTitle = song.song;
     this.selected = i;
-    this.toggleSelect(i);
-    this.audio.src = song.previewUrl;
-    this.audio.play();
+    this.songData.emit(song);
+    if (!this.innerWidth) {
+      this.toggleSelect(i);
+      this.audio.src = song.previewUrl;
+      this.audio.play();
+    } else {
+      this.toggleSelect(null);
+    }
   }
 
   public toggleSelect(i: number): void {
@@ -103,6 +110,11 @@ export class SongComponent implements OnInit {
         item.playback = false;
       }
     });
+  }
+
+  public closeMediaControls($event): void {
+    this.toggleSelect(null);
+    this.selectedTitle = undefined;
   }
 
 }

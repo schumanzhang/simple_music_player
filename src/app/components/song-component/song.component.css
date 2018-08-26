@@ -1,16 +1,18 @@
 .song-container {
     background-color: #fff;
-    height: 100%;
+    height: 720px;
 }
 
 .song-body {
-    height: 600px;
+    height: 620px;
     overflow: scroll;
+    border-bottom: 3px solid #2c3e50;
 }
 
 .song-header {
     background-color: #34495e;
     padding: 25px;
+    height: 100px;
 }
 
 .form-control {
@@ -74,11 +76,6 @@
     font-weight: 300;
 }
 
-.loader-container {
-    height: 600px;
-    padding-top: 40%;
-}
-
 .no-result {
     height: 600px;
     padding-left: 15%;
@@ -93,41 +90,10 @@
     height: auto;
 }
 
-.loader {
-    border: 8px solid #f3f3f3;
-    border-top: 8px solid #3498db;
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
-    animation: spin 2s linear infinite;
-    margin: auto;
-}
-
-.indicator {
-    opacity: 1;
-    animation: fade 2s linear infinite;
-    line-height: auto;
-}
-
 .media-player {
-    height: 60px;
-    top: -60px;
-    position: relative;
+    height: 80px;
+    top: 637px;
+    width: 100%;
+    position: absolute;
 }
 
-.footer {
-    background-color: #34495e;
-    height: 15px;
-    position: relative;
-    bottom: 0;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes fade {
-  0%, 100% { opacity: 0 }
-  50% { opacity: 1 }
-}

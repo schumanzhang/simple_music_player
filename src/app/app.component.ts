@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Song } from './models/song';
 
 @Component({
@@ -6,13 +6,20 @@ import { Song } from './models/song';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   private songs: Song[];
+  private audio: any;
+  private innerWidth: boolean;  
+
+  public ngOnInit() {
+    this.audio = new Audio();
+    this.innerWidth = (window.innerWidth > 576) ? true: false;
+  }
 
   public handleSongData($event): void {
-    console.log('handleSongData:', $event);
     this.songs = $event;
+    this.innerWidth = (window.innerWidth > 576) ? true: false;
   }
   
 }

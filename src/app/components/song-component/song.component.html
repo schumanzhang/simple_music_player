@@ -19,14 +19,9 @@
           <span class="album-name"><i>{{(song.album.length > 35) ? (song.album | slice: 0:35)+'..':(song.album)}}</i></span>
       </div>
       <div class="volume-icon">
-        <i *ngIf="song.playback" class="fa fa-volume-up indicator"></i>
+        <i *ngIf="song.playback && !audio.paused" class="fa fa-volume-up indicator"></i>
       </div>
     </div>
   </div>
-
-  <!--
-  <div *ngIf="!audio.paused" class="media-player"><media-player [audio]="audio"></media-player></div>
-  -->
-  <div class="footer"></div>
-
+  <div *ngIf="selectedTitle && !innerWidth" class="media-player"><media-player [song]="selectedTitle" [audio]="audio"></media-player></div>
 </div>

@@ -1,3 +1,8 @@
 <div class="media-panel">
-    <p> This is the media player </p>
+    <button (click)="playMusic()" class="play-button">
+        <i class="fa fa-play play-icon" *ngIf="audio.paused"></i>
+        <i class="fa fa-pause play-icon" *ngIf="!audio.paused"></i>
+    </button>
+    <span class="title-text">{{(title.length > 35) ? (title | slice: 0:35)+'..':(title)}}</span>
+    <i class="fa fa-music"></i>
 </div>

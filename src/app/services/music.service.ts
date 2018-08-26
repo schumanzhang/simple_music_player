@@ -16,4 +16,10 @@ export class MusicService {
     return this.jsonp.request(apiURL);
   }
 
+  public getMusicAlbum(searchTerm: string): any {
+    let search = searchTerm.split(' ').join('+');
+    let apiURL = `${this.baseUrl}term=${search}&media=music&attribute=albumTerm&callback=JSONP_CALLBACK`;
+    return this.jsonp.request(apiURL);
+  }
+
 }

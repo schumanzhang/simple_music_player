@@ -1,5 +1,22 @@
 <div class="album-container">
-    <div class="album-header">
+    <div class="loader-container" *ngIf="loading">
+        <div class="loader"></div>
+    </div>
+    <div *ngIf="songData && songData.length !== 0 && !loading" class="album-header">
         <img class="album-art" [src]="displayedSong.artwork">
+        <span class="song-name">{{(displayedSong.song.length > 35) ? (displayedSong.song | slice: 0:35)+'..':(displayedSong.song)}}
+            <i *ngIf="displayedSong.playback" class="fa fa-volume-up indicator"></i>
+        </span>
+        <span class="artist-name">{{(displayedSong.artist.length > 35) ? (displayedSong.artist | slice: 0:35)+'..':(displayedSong.artist)}}</span>
+        <span class="album-name"><i>{{(displayedSong.album.length > 35) ? (displayedSong.album | slice: 0:35)+'..':(displayedSong.album)}}</i></span>
+        <button (click)="playMusic()" class="play-button">
+            <i class="fa fa-play play-icon" *ngIf="!displayedSong.playback"></i>
+            <i class="fa fa-pause play-icon" *ngIf="displayedSong.playback"></i>
+        </button>
+    </div>
+    <div *ngIf="songData && songData.length !== 0 && !loading" class="album-body">
+        <div class="album-card" *ngFor="let album of albumSongs; index as i">
+            <i class="fa fa-music"></i> <span class="album-text"> {{(album.song.length > 35) ? (album.song | slice: 0:35)+'..':(album.song)}}</span>
+        </div>
     </div>
 </div>
