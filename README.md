@@ -2,6 +2,11 @@
 
 A simple music player app built with Angular. 
 
+## Pre-requisites
+
+Make sure you have installed a recent version of node.js and angular cli
+Run 'npm install' after cloning the repo
+
 ## Supported browser
 
 This app is specifically supports Google Chrome. 
