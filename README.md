@@ -15,6 +15,10 @@ This app is specifically supports Google Chrome.
  - Toggle the music player
  - Two separate views, a mobile view and a desktop view. Resize browser to see them in action
  - Smooth transition between mobile and desktop view
+ 
+ ![alt text](https://github.com/schumanzhang/simple_music_player/blob/master/src/assets/desktop.png)
+ 
+ ![alt text](https://github.com/schumanzhang/simple_music_player/blob/master/src/assets/mobile.png)
 
 ## Building the app on dev server
 
