@@ -35,14 +35,14 @@ import { MusicService } from './../../services/music.service';
 
     public retrieveAlbum(searchTerm: string): void {
       this.loading = true;
-      this.musicService.getMusicAlbum(searchTerm).subscribe(res => { 
+      this.musicService.getMusicAlbum(searchTerm).subscribe(res => {
+        this.loading = false;
         this.albumSongs = res._body.results.map((item, i) => {
           return {
             song: item.trackName,
             album: item.collectionName
           }
         });
-        this.loading = false;
       }, err => {
         this.loading = false;
         console.error(err);

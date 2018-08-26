@@ -77,11 +77,17 @@
 }
 
 .no-result {
-    height: 600px;
+    height: 620px;
     padding-left: 15%;
     padding-right: 15%;
     padding-top: 50%;
-    opacity: 0.5;
+    border-bottom: 3px solid #2c3e50;
+}
+
+.loader-container {
+    height: 620px;
+    padding-top: 50%;
+    border-bottom: 3px solid #2c3e50;
 }
 
 .error-image {

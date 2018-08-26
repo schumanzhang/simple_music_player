@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, OnChanges } from '@angular/core';
-import { Song } from './../../models/song';
 
 @Component({
   selector: 'media-player',

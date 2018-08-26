@@ -38,7 +38,6 @@ export class SongComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.registerPlaybackListeners();
     this.getSearchResults();
   }
 
@@ -47,6 +46,7 @@ export class SongComponent implements OnInit {
       this.songs.map(item => {
         if (item.playback === true) {
           item.playback = false;
+          this.selectedTitle = undefined;
         }
       });
     });
@@ -57,6 +57,7 @@ export class SongComponent implements OnInit {
     this.loading = true;
     this.musicService.getMusicData(searchTerm).subscribe(res => {
       this.loading = false;
+      this.registerPlaybackListeners();
       this.songs = res._body.results.map((item, i) => {
         return {
           id: i,
@@ -110,11 +111,6 @@ export class SongComponent implements OnInit {
         item.playback = false;
       }
     });
-  }
-
-  public closeMediaControls($event): void {
-    this.toggleSelect(null);
-    this.selectedTitle = undefined;
   }
 
 }

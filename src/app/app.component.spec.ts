@@ -1,27 +1,32 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { SongComponent } from './components/song-component/song.component';
+import { AlbumComponent } from './components/album-component/album.component';
+import { MediaPlayerComponent } from './components/media-player//media-player.component';
+import { MusicService } from './services/music.service';
+import { JsonpModule } from '@angular/http';
+import { ComponentFixtureAutoDetect } from '@angular/core/testing';
+
 describe('AppComponent', () => {
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        AppComponent
-      ],
+      declarations: [AppComponent, SongComponent, AlbumComponent, MediaPlayerComponent],
+      providers: [MusicService, { provide: ComponentFixtureAutoDetect, useValue: true }],
+      imports: [JsonpModule]
     }).compileComponents();
   }));
-  it('should create the app', async(() => {
+
+  it('should create the AppComponent', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app).toBeTruthy();
+    expect(app).toBeDefined();
   }));
-  it(`should have as title 'app'`, async(() => {
+
+  it('should have created the global audio object', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
+    expect(app.audio).toBeDefined();
   }));
-  it('should render title in a h1 tag', async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!');
-  }));
+
 });
